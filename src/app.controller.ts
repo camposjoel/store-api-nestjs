@@ -7,9 +7,14 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @ApiOperation({summary: 'Hello world'})
+  @ApiOperation({ summary: 'Hello world' })
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('tasks')
+  getTasks() {
+    return this.appService.getTasks();
   }
 }

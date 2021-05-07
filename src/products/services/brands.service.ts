@@ -10,7 +10,7 @@ export class BrandsService {
     {
       id: 0,
       name: 'Intel',
-      image: ''
+      image: '',
     },
   ];
 

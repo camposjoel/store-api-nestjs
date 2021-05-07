@@ -11,7 +11,7 @@ export class CustomersService {
       id: 0,
       name: 'Joel',
       lastname: 'Campos',
-      phone: '1234567890'
+      phone: '1234567890',
     },
   ];
 

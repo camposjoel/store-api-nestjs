@@ -6,10 +6,9 @@ import { User } from '../entities/user.entity';
 
 @Injectable()
 export class UsersService {
-
   constructor(
     private productsService: ProductsService,
-    private configService: ConfigService  
+    private configService: ConfigService,
   ) {}
 
   private counterId = 1;
@@ -75,8 +74,8 @@ export class UsersService {
     const user = this.findOne(id);
     return {
       date: new Date(),
-      user, 
-      products: this.productsService.findAll()
+      user,
+      products: this.productsService.findAll(),
     };
   }
 }

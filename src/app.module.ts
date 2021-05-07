@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { environments } from './environments';
+import { DatabaseModule } from './database/database.module';
 import config from './config';
 
 @Module({
@@ -18,13 +19,14 @@ import config from './config';
       validationSchema: Joi.object({
         API_KEY: Joi.number().required(),
         DATABASE_NAME: Joi.string().required(),
-        DATABASE_PORT: Joi.number().required()
-      })
+        DATABASE_PORT: Joi.number().required(),
+      }),
     }),
     UsersModule,
-    ProductsModule
+    ProductsModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

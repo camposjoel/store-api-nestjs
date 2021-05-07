@@ -8,6 +8,6 @@ import { UsersService } from './services/users.service';
 @Module({
   imports: [ProductsModule],
   controllers: [CustomersController, UsersController],
-  providers: [CustomersService, UsersService]
+  providers: [CustomersService, UsersService],
 })
 export class UsersModule {}
