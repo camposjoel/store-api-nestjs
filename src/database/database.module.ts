@@ -11,11 +11,11 @@ import config from '../config';
       useFactory: (configService: ConfigType<typeof config>) => {
         const { uri } = configService.mongo;
         return {
-          uri
+          uri,
         };
       },
-      inject: [config.KEY]
-    })
+      inject: [config.KEY],
+    }),
   ],
   providers: [
     {
@@ -27,9 +27,9 @@ import config from '../config';
         const database = client.db('store-db');
         return database;
       },
-      inject: [config.KEY]
-    }
+      inject: [config.KEY],
+    },
   ],
-  exports: ['MONGO', MongooseModule]
+  exports: ['MONGO', MongooseModule],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

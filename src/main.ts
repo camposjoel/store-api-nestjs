@@ -9,8 +9,8 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       transformOptions: {
-        enableImplicitConversion: true
-      }
+        enableImplicitConversion: true,
+      },
     }),
   );
   const config = new DocumentBuilder()

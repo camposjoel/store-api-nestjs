@@ -12,7 +12,11 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ProductsService } from '../services/products.service';
-import { CreateProductDto, UpdateProductDto, FilterProductsDto } from '../dtos/products.dto';
+import {
+  CreateProductDto,
+  UpdateProductDto,
+  FilterProductsDto,
+} from '../dtos/products.dto';
 import { MongoIdPipe } from '../../common/mongo-id.pipe';
 
 @ApiTags('products')
@@ -53,5 +57,4 @@ export class ProductsController {
   delete(@Param('id', MongoIdPipe) id: string) {
     return this.productsService.delete(id);
   }
-
 }

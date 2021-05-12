@@ -1,14 +1,18 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, FilterQuery } from 'mongoose';
-import { CreateProductDto, UpdateProductDto, FilterProductsDto } from '../dtos/products.dto';
+import {
+  CreateProductDto,
+  UpdateProductDto,
+  FilterProductsDto,
+} from '../dtos/products.dto';
 import { Product } from '../entities/product.entity';
 
 @Injectable()
 export class ProductsService {
   constructor(
-    @InjectModel(Product.name) private productModel: Model<Product>
-  ) { }
+    @InjectModel(Product.name) private productModel: Model<Product>,
+  ) {}
 
   findAll(params?: FilterProductsDto) {
     if (params) {
@@ -18,9 +22,14 @@ export class ProductsService {
       if (minPrice && maxPrice) {
         filters.price = { $gte: minPrice, $lte: maxPrice };
       }
-      return this.productModel.find(filters).skip(offset).limit(limit).exec();
-  }
-    return this.productModel.find().exec();
+      return this.productModel
+        .find(filters)
+        .populate('brand')
+        .skip(offset)
+        .limit(limit)
+        .exec();
+    }
+    return this.productModel.find().populate('brand').exec();
   }
 
   async findOne(id: string) {
@@ -38,9 +47,15 @@ export class ProductsService {
   }
 
   update(id: string, data: UpdateProductDto) {
-    const product = this.productModel.findByIdAndUpdate(id, {
-      $set: data
-    }, { new: true }).exec();
+    const product = this.productModel
+      .findByIdAndUpdate(
+        id,
+        {
+          $set: data,
+        },
+        { new: true },
+      )
+      .exec();
     if (!product) {
       throw new NotFoundException(`Product with id ${id} not exists`);
     }
@@ -50,5 +65,4 @@ export class ProductsService {
   delete(id: string) {
     return this.productModel.findByIdAndDelete(id);
   }
-
 }
